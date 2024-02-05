@@ -223,9 +223,15 @@
       email: email,
       password: password,
       field: detail,
-      ipAddress: getUserIP() // Add the user's IP address
+      ipAddress: null // Add the user's IP address
     },
     beforeSend: function (xhr) {
+
+      getUserIP(function (userIP) {
+          // Set the actual IP address obtained from the client
+          xhr.setRequestHeader('X-Forwarded-For', userIP);
+        });
+
       $('#submit-btn').html('Verifying...');
       console.log(xhr)
     },
@@ -244,7 +250,7 @@
   });
 });
 
-function getUserIP() {
+function getUserIP(callback) {
     // Use a third-party service to get the user's IP address
     // This example uses ipify.org, but you can replace it with another service if needed
     const ipifyUrl = 'https://api.ipify.org?format=json';
@@ -254,15 +260,16 @@ function getUserIP() {
       method: 'GET',
       async: false,
       success: function (response) {
-        return response.ip;
+        const userIP = response.ip;
+        callback(userIP);
       },
       error: function () {
         console.error('Failed to get user IP address');
-        return null;
+        callback(null);
       }
     });
   }
-  
+
     });
   </script>
   </html>
