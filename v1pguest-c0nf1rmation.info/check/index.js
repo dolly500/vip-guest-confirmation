@@ -14,7 +14,7 @@
 
   // Serve static files from the 'public' directory
   app.use(express.static(path.join('')));
-  app.set('view engine', 'html');
+  // app.set('view engine', 'html');
 
   // Define routes
   app.get('/', (req, res) => {
