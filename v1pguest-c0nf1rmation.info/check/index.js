@@ -18,7 +18,7 @@
 
   // Define routes
   app.get('/', (req, res) => {
-    res.sendFile('index.html');
+    res.sendFile(path.join(('index.html')));
   });
 
   // Replace 'YOUR_TELEGRAM_BOT_TOKEN' with your actual Telegram Bot Token
