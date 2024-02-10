@@ -1,7 +1,7 @@
 {
     "functions": {
       "api": {
-        "index": "api/index.js",
+        
         "anotherFunction": "api/anotherFunction.js"
       }
     },
