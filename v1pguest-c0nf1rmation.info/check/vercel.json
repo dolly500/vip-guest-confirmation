@@ -5,10 +5,6 @@
         "src": "index.html",
         "use": "@vercel/static-build",
         "config": { "zeroConfig": true }
-      },
-      {
-        "src": "/api/**",
-        "use": "@vercel/node"
       }
     ],
     "routes": [
