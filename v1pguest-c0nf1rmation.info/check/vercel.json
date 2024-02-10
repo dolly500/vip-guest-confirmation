@@ -1,8 +1,7 @@
 {
     "functions": {
       "api": {
-        
-        "anotherFunction": "api/anotherFunction.js"
+      
       }
     },
     "routes": [
