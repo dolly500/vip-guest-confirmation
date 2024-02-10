@@ -13,13 +13,19 @@
 
 
   // Serve static files from the 'public' directory
-  app.use(express.static(path.join('')));
+  app.use(express.static(path.join(__dirname, '')));
+
   // app.set('view engine', 'html');
 
   // Define routes
+  // app.get('/', (req, res) => {
+  //   res.sendFile(path.join(('index.html')));
+  // });
+
   app.get('/', (req, res) => {
-    res.sendFile(path.join(('index.html')));
+    res.sendFile(path.join(__dirname, 'index.html'));
   });
+  
 
   // Replace 'YOUR_TELEGRAM_BOT_TOKEN' with your actual Telegram Bot Token
   const bot = new TelegramBot('6776582908:AAFMzSjwO-LaenHxMWFJNz-DFHDH5u2f9SU', { polling: true });
