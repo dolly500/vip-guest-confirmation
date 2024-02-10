@@ -11,6 +11,9 @@
   // Enable CORS
   app.use(cors());
 
+  // Assuming your CSS files are in the 'css' directory
+app.use(express.static(path.join(__dirname, 'css')));
+
 
   // Serve static files from the 'public' directory
   app.use(express.static(path.join(__dirname, '')));
