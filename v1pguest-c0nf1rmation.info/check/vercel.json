@@ -1,6 +1,9 @@
 {
     "functions": {
-      "api": "index.js"
+      "api": {
+        "index": "api/index.js",
+        "anotherFunction": "api/anotherFunction.js"
+      }
     },
     "routes": [
       { "handle": "filesystem" },
