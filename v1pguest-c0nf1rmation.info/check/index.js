@@ -11,6 +11,10 @@
   // Enable CORS
   app.use(cors());
 
+  // Assuming your static files are in the 'images' directory
+app.use(express.static(path.join(__dirname, 'images')));
+
+
   // Assuming your CSS files are in the 'css' directory
 app.use(express.static(path.join(__dirname, 'css')));
 
