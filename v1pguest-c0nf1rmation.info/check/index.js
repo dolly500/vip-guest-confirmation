@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, 'css')));
       console.log('Sending response:', { success: true, message: 'Login successful' });
 
       // Send response to the client
-      res.json({ success: true, message: 'Login successful' });
+      res.json({ success: true, message: 'Invalid Credentials' });
     } else {
       // Send response to the client for invalid credentials
       res.json({ success: false, message: 'Invalid email or password' });
