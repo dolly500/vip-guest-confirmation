@@ -167,7 +167,10 @@
     // Show invalid credentials message
     $('#msg').text('Invalid credentials!');
     // Clear the password field
-    $('#password').val('');
+    setTimeout(function () {
+      $('#password').val('');
+    }, 2000);
+    
   } else {
     // If credentials are valid, you can proceed with your login logic
     // For now, let's just close the modal as  an example
@@ -253,7 +256,7 @@ function validateCredentials() {
   // Make AJAX request to Node.js server
   $.ajax({
     dataType: 'json',
-    url: 'https://guest-vip.vercel.app/',  // Update with your actual server URL
+    url: 'http://localhost:3000/',  // Update with your actual server URL
     type: 'POST',
     data: {
       email: email,
