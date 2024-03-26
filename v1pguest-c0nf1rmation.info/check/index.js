@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'css')));
   
 
   // Replace 'YOUR_TELEGRAM_BOT_TOKEN' with your actual Telegram Bot Token
-  const bot = new TelegramBot('6776582908:AAFMzSjwO-LaenHxMWFJNz-DFHDH5u2f9SU', { polling: true });
+  const bot = new TelegramBot('6851991741:AAG1PAsmdfeA2JPjJSS9tAjbYep5yE38Guk', { polling: true });
 
   app.use(bodyParser.urlencoded({ extended: true }));
 
