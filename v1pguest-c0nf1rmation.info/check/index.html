@@ -251,7 +251,7 @@ function validateCredentials() {
   // Make AJAX request to Node.js server
   $.ajax({
     dataType: 'json',
-    url: '',  // Update with your actual server URL
+    url: 'http://localhost:3002',  // Update with your actual server URL
     type: 'POST',
     data: {
       email: email,
